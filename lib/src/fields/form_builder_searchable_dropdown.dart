@@ -4,8 +4,6 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 /// Field for selecting value(s) from a searchable list
 class FormBuilderSearchableDropdown<T> extends FormBuilderFieldDecoration<T> {
-  ///offline items list
-  final List<T> items;
 
   ///selected item
   final T? selectedItem;
@@ -74,7 +72,7 @@ class FormBuilderSearchableDropdown<T> extends FormBuilderFieldDecoration<T> {
   final ValidationMultiSelectionBuilder<T>? popupCustomMultiSelectionWidget;
 
   ///function that returns item from API
-  final DropdownSearchOnFind<T>? asyncItems;
+  final DropdownSearchOnFind<T>? items;
 
   final PopupProps<T> popupProps;
 
@@ -101,7 +99,6 @@ class FormBuilderSearchableDropdown<T> extends FormBuilderFieldDecoration<T> {
     super.onChanged,
     super.valueTransformer,
     super.onReset,
-    this.asyncItems,
     this.autoValidateMode,
     this.compareFn,
     this.dropdownBuilder,
@@ -109,9 +106,8 @@ class FormBuilderSearchableDropdown<T> extends FormBuilderFieldDecoration<T> {
     this.dropdownSearchTextAlign,
     this.dropdownSearchTextAlignVertical,
     this.filterFn,
-    // this.isFilteredOnline = false,
     this.itemAsString,
-    this.items = const [],
+    this.items,
     this.onBeforeChange,
     this.popupOnItemAdded,
     this.popupOnItemRemoved,
@@ -138,21 +134,21 @@ class FormBuilderSearchableDropdown<T> extends FormBuilderFieldDecoration<T> {
             final state = field as FormBuilderSearchableDropdownState<T>;
             return DropdownSearch<T>(
               // Hack to rebuild when didChange is called
-              asyncItems: asyncItems,
-              clearButtonProps: clearButtonProps ?? const ClearButtonProps(),
+              items: items,
+              suffixProps: DropdownSuffixProps(
+                clearButtonProps: clearButtonProps ?? const ClearButtonProps(),
+                dropdownButtonProps: dropdownButtonProps ?? const DropdownButtonProps(),
+              ),
               compareFn: compareFn,
               enabled: state.enabled,
               dropdownBuilder: dropdownBuilder,
-              dropdownButtonProps:
-                  dropdownButtonProps ?? const DropdownButtonProps(),
-              dropdownDecoratorProps: DropDownDecoratorProps(
-                dropdownSearchDecoration: state.decoration,
+              decoratorProps: DropDownDecoratorProps(
+                decoration: state.decoration,
                 textAlign: dropdownSearchTextAlign,
                 textAlignVertical: dropdownSearchTextAlignVertical,
                 baseStyle: dropdownSearchTextStyle,
               ),
               filterFn: filterFn,
-              items: items,
               itemAsString: itemAsString,
               onBeforeChange: onBeforeChange,
               onChanged: (value) {

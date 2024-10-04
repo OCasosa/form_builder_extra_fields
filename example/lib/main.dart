@@ -59,7 +59,7 @@ class MyHomePageState extends State<MyHomePage> {
                 FormBuilderSearchableDropdown<String>(
                   name: 'searchable_dropdown_online',
                   onChanged: _onChanged,
-                  asyncItems: (filter) async {
+                  items: (filter) async {
                     await Future.delayed(const Duration(seconds: 1));
                     return allCountries
                         .where((element) => element
@@ -78,7 +78,7 @@ class MyHomePageState extends State<MyHomePage> {
                     labelText: 'Search',
                   ),
                   name: 'searchable_dropdown_offline',
-                  items: allCountries,
+                  items: (_) async => allCountries,
                   onChanged: _onChanged,
                   decoration: const InputDecoration(
                       labelText: 'Searchable Dropdown Offline'),
@@ -86,13 +86,13 @@ class MyHomePageState extends State<MyHomePage> {
                       country.toLowerCase().contains(filter.toLowerCase()),
                 ),
                 const SizedBox(height: 15),
-                FormBuilderColorPickerField(
-                  name: 'color_picker',
-                  initialValue: Colors.yellow,
-                  // readOnly: true,
-                  colorPickerType: ColorPickerType.materialPicker,
-                  decoration: const InputDecoration(labelText: 'Color Picker'),
-                ),
+                // FormBuilderColorPickerField(
+                //   name: 'color_picker',
+                //   initialValue: Colors.yellow,
+                //   // readOnly: true,
+                //   colorPickerType: ColorPickerType.materialPicker,
+                //   decoration: const InputDecoration(labelText: 'Color Picker'),
+                // ),
                 FormBuilderTypeAhead<String>(
                   decoration: const InputDecoration(
                     labelText: 'TypeAhead (Autocomplete TextField)',
@@ -130,15 +130,15 @@ class MyHomePageState extends State<MyHomePage> {
                   subtractIcon: const Icon(Icons.arrow_left),
                   onChanged: _onChanged,
                 ),
-                FormBuilderRatingBar(
-                  decoration: const InputDecoration(labelText: 'Rating Bar'),
-                  name: 'rate',
-                  // enabled: false,
-                  itemSize: 32.0,
-                  initialValue: 1.0,
-                  maxRating: 5.0,
-                  onChanged: _onChanged,
-                ),
+                // FormBuilderRatingBar(
+                //   decoration: const InputDecoration(labelText: 'Rating Bar'),
+                //   name: 'rate',
+                //   // enabled: false,
+                //   itemSize: 32.0,
+                //   initialValue: 1.0,
+                //   maxRating: 5.0,
+                //   onChanged: _onChanged,
+                // ),
                 FormBuilderSignaturePad(
                   decoration: const InputDecoration(
                     labelText: 'Signature Pad',

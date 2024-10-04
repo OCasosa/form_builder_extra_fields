@@ -1,6 +1,7 @@
 name: form_builder_extra_fields
 description: Additional ready-made form input fields for flutter_form_builder package
 version: 11.0.0
+publish_to: "none"
 issue_tracker: https://github.com/flutter-form-builder-ecosystem/form_builder_extra_fields/issues
 homepage: https://github.com/flutter-form-builder-ecosystem
 repository: https://github.com/flutter-form-builder-ecosystem/form_builder_extra_fields
@@ -17,13 +18,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_form_builder: ^9.4.0
-  flutter_colorpicker: ^1.1.0
-  dropdown_search: ^5.0.6
+  flutter_form_builder: ^9.4.1
+  # flutter_colorpicker: ^1.1.0
+  dropdown_search: ^6.0.1
   signature: ^5.5.0
   intl: ^0.19.0
   flutter_typeahead: ^5.2.0
-  flutter_rating_bar: ^4.0.1
+  # flutter_rating_bar: ^4.0.1
 
 dev_dependencies:
   flutter_lints: ^4.0.0
