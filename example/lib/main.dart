@@ -38,7 +38,18 @@ class MyHomePage extends StatefulWidget {
 class MyHomePageState extends State<MyHomePage> {
   final _formKey = GlobalKey<FormBuilderState>();
 
+  final _bottomSheetKey = GlobalKey<DropdownSearchState>();
+  final _bottomSheet2 = GlobalKey<DropdownSearchState>();
+
   void _onChanged(dynamic val) => debugPrint(val.toString());
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _bottomSheet2.currentState?.openDropDownSearch();
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,28 +68,38 @@ class MyHomePageState extends State<MyHomePage> {
             child: Column(
               children: [
                 FormBuilderSearchableDropdown<String>(
+                  bottomSheetKey: _bottomSheet2,
                   name: 'searchable_dropdown_online',
-                  onChanged: _onChanged,
-                  items: (filter) async {
+                  onChanged: (_) {
+                    _bottomSheetKey.currentState?.openDropDownSearch();
+                  },
+                  items: (filter, _) async {
                     await Future.delayed(const Duration(seconds: 1));
-                    return allCountries
-                        .where((element) => element
-                            .toLowerCase()
-                            .contains(filter.toLowerCase()))
-                        .toList();
+                    return [
+                      "Option 1",
+                    ];
+
+                    // allCountries
+                    //     .where((element) => element
+                    //         .toLowerCase()
+                    //         .contains(filter.toLowerCase()))
+                    //     .toList();
                   },
                   decoration: const InputDecoration(
                     labelText: 'Searchable Dropdown Online',
                   ),
                 ),
                 FormBuilderSearchableDropdown<String>(
+                  bottomSheetKey: _bottomSheetKey,
                   popupProps: const PopupProps.menu(showSearchBox: true),
                   dropdownSearchDecoration: const InputDecoration(
                     hintText: 'Search',
                     labelText: 'Search',
                   ),
                   name: 'searchable_dropdown_offline',
-                  items: (_) async => allCountries,
+                  items: (_, __) => [
+                    'Option 1',
+                  ],
                   onChanged: _onChanged,
                   decoration: const InputDecoration(
                       labelText: 'Searchable Dropdown Offline'),

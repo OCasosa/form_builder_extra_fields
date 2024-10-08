@@ -4,13 +4,6 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 /// Field for selecting value(s) from a searchable list
 class FormBuilderSearchableDropdown<T> extends FormBuilderFieldDecoration<T> {
-
-  ///selected item
-  final T? selectedItem;
-
-  ///selected items
-  final List<T> selectedItems;
-
   ///called when a new items are selected
   final ValueChanged<List<T>>? onChangedMultiSelection;
 
@@ -72,7 +65,7 @@ class FormBuilderSearchableDropdown<T> extends FormBuilderFieldDecoration<T> {
   final ValidationMultiSelectionBuilder<T>? popupCustomMultiSelectionWidget;
 
   ///function that returns item from API
-  final DropdownSearchOnFind<T>? items;
+  final DropdownSearchOnFind<T> items;
 
   final PopupProps<T> popupProps;
 
@@ -84,6 +77,9 @@ class FormBuilderSearchableDropdown<T> extends FormBuilderFieldDecoration<T> {
 
   ///custom dropdown icon button properties
   final DropdownButtonProps? dropdownButtonProps;
+
+  /// Key for the DropdownSearch widget
+  final Key? bottomSheetKey;
 
   /// Creates field for selecting value(s) from a searchable list
   FormBuilderSearchableDropdown({
@@ -107,13 +103,11 @@ class FormBuilderSearchableDropdown<T> extends FormBuilderFieldDecoration<T> {
     this.dropdownSearchTextAlignVertical,
     this.filterFn,
     this.itemAsString,
-    this.items,
+    required this.items,
     this.onBeforeChange,
     this.popupOnItemAdded,
     this.popupOnItemRemoved,
     this.popupSelectionWidget,
-    this.selectedItem,
-    this.selectedItems = const [],
     this.popupProps = const PopupProps.menu(
       showSearchBox: true,
       fit: FlexFit.loose,
@@ -121,6 +115,7 @@ class FormBuilderSearchableDropdown<T> extends FormBuilderFieldDecoration<T> {
     this.clearButtonProps,
     this.dropdownSearchTextStyle,
     this.dropdownButtonProps,
+    this.bottomSheetKey,
   })  : assert(T == String || compareFn != null),
         isMultiSelectionMode = false,
         dropdownBuilderMultiSelection = null,
@@ -132,12 +127,15 @@ class FormBuilderSearchableDropdown<T> extends FormBuilderFieldDecoration<T> {
         super(
           builder: (FormFieldState<T?> field) {
             final state = field as FormBuilderSearchableDropdownState<T>;
+
             return DropdownSearch<T>(
               // Hack to rebuild when didChange is called
+              key: bottomSheetKey,
               items: items,
               suffixProps: DropdownSuffixProps(
                 clearButtonProps: clearButtonProps ?? const ClearButtonProps(),
-                dropdownButtonProps: dropdownButtonProps ?? const DropdownButtonProps(),
+                dropdownButtonProps:
+                    dropdownButtonProps ?? const DropdownButtonProps(),
               ),
               compareFn: compareFn,
               enabled: state.enabled,
