@@ -23,7 +23,7 @@ dependencies:
   dropdown_search:
     git:
       url: https://github.com/OCasosa/dropdown_search.git
-      ref: 6.0.5
+      ref: 6.0.6
   signature: ^5.5.0
   intl: ^0.19.0
   flutter_typeahead: ^5.2.0
