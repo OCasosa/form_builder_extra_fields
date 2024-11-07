@@ -122,9 +122,8 @@ class MyHomePageState extends State<MyHomePage> {
                   name: 'country',
                   onChanged: _onChanged,
                   itemBuilder: (context, country) {
-                    return ListTile(title: Text(country));
+                    return ListTile(title: Text(country.toString()));
                   },
-                  initialValue: 'Uganda',
                   suggestionsCallback: (query) {
                     if (query.isNotEmpty) {
                       var lowercaseQuery = query.toLowerCase();

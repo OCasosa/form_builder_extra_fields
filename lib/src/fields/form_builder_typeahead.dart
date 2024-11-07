@@ -127,6 +127,11 @@ class FormBuilderTypeAhead<T> extends FormBuilderFieldDecoration<T> {
                         controller: controller,
                         focusNode: focusNode,
                         decoration: state.decoration,
+                        onChanged: (value) {
+                          if (T == String) {
+                            state.didChange(value as T);
+                          }
+                        },
                         style: state.enabled
                             ? theme.textTheme.titleMedium
                             : theme.textTheme.titleMedium!.copyWith(
