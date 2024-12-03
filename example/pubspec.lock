@@ -69,8 +69,8 @@ packages:
     dependency: transitive
     description:
       path: "."
-      ref: "6.0.5"
-      resolved-ref: e86ec0be432851571b42d986eaa507969e1446fe
+      ref: "6.0.6"
+      resolved-ref: "367092a06e43074a8770f7961567c54ea3d77b48"
       url: "https://github.com/OCasosa/dropdown_search.git"
     source: git
     version: "6.0.4"
@@ -188,7 +188,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "11.0.0"
+    version: "11.0.3"
   form_builder_validators:
     dependency: "direct main"
     description:
